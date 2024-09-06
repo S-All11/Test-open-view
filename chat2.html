@@ -25,22 +25,22 @@
 <body>
     <h1>Discourse chat test</h1>
 
-    <!-- Disqus コメントシステムの埋め込み -->
-    <div id="disqus_thread"></div>
-    <script>
-        /**
-         * * * IMPORTANT * * *
-         * Replace SHORTNAME with your forum shortname!
-         */
-        (function() { // DON'T EDIT BELOW THIS LINE
-            var d = document, s = d.createElement('script');
-            s.src = 'https://https-s-all11-github-io-test-open-view.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
+    <!-- Discourse コメントシステムの埋め込み -->
+    <<div id='discourse-comments'></div>
+    <meta name='highmans' content='highmans'>
+    
+    <script type="text/javascript">
+      DiscourseEmbed = {
+        discourseUrl: 'https://extestdomain.discourse.group/',
+        discourseEmbedUrl: 'EMBED_URL',
+        // className: 'CLASS_NAME',
+      };
+    
+      (function() {
+        var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+        d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+      })();
     </script>
-    <noscript>
-        <p><a href="https://https-s-all11-github-io-test-open-view.disqus.com/?url=" rel="nofollow">コメントはこちら</a></p>
-    </noscript>
 </body>
 </html>
