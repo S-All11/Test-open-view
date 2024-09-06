@@ -20,12 +20,38 @@
             margin: 20px auto;
             max-width: 800px; /* コメントセクションの最大幅を設定 */
         }
+        .contact-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px; /* アイコン間の間隔 */
+            margin: 20px 0;
+        }
+        .contact-icons img {
+            width: 60px; /* アイコンのサイズ */
+            height: 60px; /* アイコンのサイズ */
+            object-fit: contain; /* アイコンの比率を保持 */
+        }
+        @media (max-width: 600px) {
+            .contact-icons img {
+                width: 40px; /* 小さい画面用のアイコンサイズ */
+                height: 40px; /* 小さい画面用のアイコンサイズ */
+            }
+        }
     </style>
 </head>
 <body>
     <h1>AIチャットサービス</h1>
+    <h2>本日の営業時刻18:00～23:00</h2>
     <h2>現在、待機中の〇〇〇〇一覧</h2>
-    
+    <!-- 〇〇〇〇のアイコンのセクション -->
+    <div class="contact-icons">
+        <img src="https://via.placeholder.com/60" alt="icon 1">
+        <img src="https://via.placeholder.com/60" alt="icon 2">
+        <img src="https://via.placeholder.com/60" alt="icon 3">
+        <img src="https://via.placeholder.com/60" alt="icon 4">
+    </div>
+
     <!-- Disqus コメントシステムの埋め込み -->
     <div id="disqus_thread"></div>
     <script>
