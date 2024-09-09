@@ -26,21 +26,15 @@
     <h1>Discourse chat test</h1>
 
     <!-- Discourse コメントシステムの埋め込み -->
-    <<div id='discourse-comments'></div>
-    <meta name='discourse-username' content='highmans'>
-    
+    <div id="discourse-comments"></div>
     <script type="text/javascript">
-      DiscourseEmbed = {
-        discourseUrl: 'https://extestdomain.discourse.group/t/topic/8',
-        discourseEmbedUrl: 'https://s-all11.github.io/Test-open-view/chat2.html',
-        // className: 'CLASS_NAME',
-      };
-    
+      DiscourseEmbed = { discourseUrl: 'https://extestdomain.discourse.group/latest',
+                         discourseEmbedUrl: 'https://s-all11.github.io/Test-open-view/chat2_1.html' };
       (function() {
         var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
         d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
       })();
-    </script>
+    </script>    
 </body>
 </html>
