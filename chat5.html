@@ -57,7 +57,7 @@
     <div id="replyForm">
         <h3>トピックに返信する</h3>
         <textarea id="message" placeholder="返信内容を入力してください"></textarea>
-        <input type="hidden" id="topicId" value="123">  <!-- トピックIDを指定 -->
+        <input type="hidden" id="topicId" value="12">  <!-- トピックIDを指定 -->
         <button type="submit" id="sendReplyButton">返信する</button>
     </div>
 
@@ -84,7 +84,7 @@
           body: JSON.stringify({
             api_key: apiKey,
             api_username: username,
-            topic_id: 12,  // トピックID
+            topic_id: topic_id,  // トピックID
             raw: message  // 投稿内容
           })
         });
