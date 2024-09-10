@@ -1,0 +1,30 @@
+async function sendReply(topic_id, message) {
+    const apiUrl = 'https://your-discourse-forum-url/posts';
+    const apiKey = 'YOUR_API_KEY';
+    const username = 'YOUR_USERNAME';
+  
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        api_key: apiKey,
+        api_username: username,
+        topic_id: topic_id,  // 対象トピックID
+        raw: message  // 投稿内容
+      })
+    });
+  
+    const result = await response.json();
+    console.log(result);
+  }
+  
+  // フォームからの入力内容を取得して送信する例
+  document.querySelector('#replyForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+    const message = document.querySelector('#message').value;
+    const topicId = document.querySelector('#topicId').value;
+    sendReply(topicId, message);
+  });
+  
