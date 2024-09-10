@@ -20,4 +20,4 @@ https://s-all11.github.io/Test-open-view/chat4.html
 
 https://s-all11.github.io/Test-open-view/chat5.html
 
-https://s-all11.github.io/Test-open-view/test2.html
+https://s-all11.github.io/Test-open-view/test_disq.html
