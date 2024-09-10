@@ -5,3 +5,19 @@ Disqusのテストページ : https://s-all11.github.io/Test-open-view/chat1.htm
 Discourseのテストページ(※投稿機能はまだ未実装) : https://s-all11.github.io/Test-open-view/chat2_1.html
 
 Disqus chat test (※まだ未実装) : non
+
+編集アクセス用
+
+https://s-all11.github.io/Test-open-view/chat1.html
+
+https://s-all11.github.io/Test-open-view/chat2.html
+
+https://s-all11.github.io/Test-open-view/chat2_1.html
+
+https://s-all11.github.io/Test-open-view/chat3.html
+
+https://s-all11.github.io/Test-open-view/chat4.html
+
+https://s-all11.github.io/Test-open-view/chat5.html
+
+https://s-all11.github.io/Test-open-view/test2.html
