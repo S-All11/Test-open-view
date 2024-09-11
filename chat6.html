@@ -3,34 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test2webAIchat</title>
+    <title>Web AI Chat</title>
     <style>
         body {
-            background-color: #333; /* 背景色を黒系のグレーに設定 */
-            color: #f0f0f0; /* 文字色を白に設定 */
-            font-family: Arial, sans-serif; /* フォントの設定 */
+            background-color: #333;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            text-align: center; /* テキストを中央揃え */
         }
-        h1, h2, h3, h4, h5, h6 {
-            color: #d2d205; /* 見出しの文字色を黄色に設定 */
-        }
-        #discourse-comments {
-            margin: 20px auto;
-            max-width: 800px; /* コメントセクションの最大幅を設定 */
-        }
-        #replyForm {
-            margin: 20px auto;
+        .chat-container {
             max-width: 800px;
-            padding: 10px;
+            margin: 0 auto;
+            padding: 20px;
             background-color: #444;
             border-radius: 10px;
+        }
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.user .bubble {
+            background-color: #d2d205;
+            color: #333;
+        }
+        .message.other .bubble {
+            background-color: #555;
+            color: #f0f0f0;
+        }
+        .bubble {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+        #replyForm {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         textarea {
             width: 100%;
             height: 100px;
-            margin-bottom: 10px;
             padding: 10px;
             border-radius: 5px;
             border: none;
@@ -45,36 +62,52 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        #countdown {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #d2d205;
+        }
     </style>
 </head>
 <body>
-    <h1>Discourse chat test</h1>
+    <div class="chat-container">
+        <h1>AI Web Chat</h1>
+        
+        <!-- メッセージ表示エリア -->
+        <div id="chat">
+            <div class="message user">
+                <div class="bubble">これはあなたのメッセージです</div>
+            </div>
+            <div class="message other">
+                <div class="bubble">これは他のユーザーのメッセージです</div>
+            </div>
+        </div>
 
-    <!-- Discourse コメントシステムの埋め込み -->
-    <div id="discourse-comments"></div>
+        <!-- カウントダウンタイマー -->
+        <div id="countdown">残り時間: 00:10:00</div>
 
-    <!-- 返信フォーム -->
-    <div id="replyForm">
-        <h3>トピックに返信する</h3>
-        <textarea id="message" placeholder="返信内容を入力してください"></textarea>
-        <input type="hidden" id="topicId" value="12">  <!-- トピックIDを指定 -->
-        <button type="submit" id="sendReplyButton">返信する</button>
+        <!-- 返信フォーム -->
+        <div id="replyForm">
+            <textarea id="message" placeholder="メッセージを入力してください"></textarea>
+            <input type="hidden" id="topicId" value="12">
+            <button type="submit" id="sendReplyButton">送信</button>
+        </div>
     </div>
 
     <script type="text/javascript">
-      DiscourseEmbed = { discourseUrl: 'https://extestdomain.discourse.group/',
-                         discourseEmbedUrl: 'MY_PAGE_HTML' };
+      // Discourse埋め込み
+      DiscourseEmbed = { discourseUrl: 'https://extestdomain.discourse.group/', discourseEmbedUrl: 'https://s-all11.github.io/Test-open-view/chat6.html' };
       (function() {
         var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
         d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
       })();
 
-      // メッセージ送信のリクエスト関数
+      // メッセージ送信関数
       async function sendReply(topic_id, message) {
         const apiUrl = 'https://extestdomain.discourse.group/posts';
-        const apiKey = 'My_API_key';  // 取得したAPIキー
-        const username = 'MY_ID';  // あなたのDiscourseユーザー名
+        const apiKey = '747b1a9d003b077c87e937fa8e20bf2d0ed149f3a0189d7ccbe341aed792220b';
+        const username = 'highmans';
 
         const response = await fetch(apiUrl, {
           method: 'POST',
@@ -84,29 +117,53 @@
           body: JSON.stringify({
             api_key: apiKey,
             api_username: username,
-            topic_id: topic_id,  // トピックID
-            raw: message  // 投稿内容
+            topic_id: topic_id,
+            raw: message
           })
         });
 
         const result = await response.json();
         if (response.ok) {
           alert("返信が投稿されました！");
+          const chat = document.getElementById('chat');
+          const newMessage = document.createElement('div');
+          newMessage.className = 'message user';
+          newMessage.innerHTML = `<div class="bubble">${message}</div>`;
+          chat.appendChild(newMessage);
         } else {
           alert("エラーが発生しました: " + result.message);
         }
       }
 
-      // 返信フォームの送信イベントを設定
+      // 送信イベント
       document.querySelector('#sendReplyButton').addEventListener('click', function() {
         const message = document.querySelector('#message').value;
         const topicId = document.querySelector('#topicId').value;
         if (message.trim() === "") {
-          alert("返信内容を入力してください");
+          alert("メッセージを入力してください");
           return;
         }
         sendReply(topicId, message);
+        document.querySelector('#message').value = '';  // 送信後にテキストエリアをクリア
       });
-    </script>    
+
+      // カウントダウンタイマー
+      let timeLeft = 600;  // 600秒 (10分)
+      const countdownElement = document.getElementById('countdown');
+
+      function updateCountdown() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        countdownElement.textContent = `残り時間: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft > 0) {
+          timeLeft--;
+        } else {
+          alert('利用時間が終了しました');
+          document.querySelector('#sendReplyButton').disabled = true;  // ボタン無効化
+        }
+      }
+
+      setInterval(updateCountdown, 1000);  // 1秒ごとにカウントダウン更新
+    </script>
 </body>
 </html>
