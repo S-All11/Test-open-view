@@ -77,7 +77,7 @@
         <div id="chat"></div>
 
         <!-- カウントダウンタイマー -->
-        <div id="countdown">残り時間: 00:10:00</div>
+        <div id="countdown">残り時間: 00:05:00</div>
 
         <!-- 返信フォーム -->
         <div id="replyForm">
@@ -174,8 +174,10 @@
         if (timeLeft > 0) {
           timeLeft--;
         } else {
-          alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
-          document.querySelector('#sendReplyButton').disabled = true;  // ボタン無効化
+          //alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
+          //document.querySelector('#sendReplyButton').disabled = true;  // ボタン無効化
+          alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。'); // アラートを表示
+            window.location.href = 'https://s-all11.github.io/Test-open-view/'; // リンク先にリダイレクト
         }
       }
 
