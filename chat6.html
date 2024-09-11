@@ -74,14 +74,7 @@
         <h1>AI Web Chat</h1>
         
         <!-- メッセージ表示エリア -->
-        <div id="chat">
-            <div class="message user">
-                <div class="bubble">これはあなたのメッセージです</div>
-            </div>
-            <div class="message other">
-                <div class="bubble">これは他のユーザーのメッセージです</div>
-            </div>
-        </div>
+        <div id="chat"></div>
 
         <!-- カウントダウンタイマー -->
         <div id="countdown">残り時間: 00:10:00</div>
@@ -95,15 +88,42 @@
     </div>
 
     <script type="text/javascript">
-      // Discourse埋め込み
-      DiscourseEmbed = { discourseUrl: 'https://extestdomain.discourse.group/', discourseEmbedUrl: 'https://s-all11.github.io/Test-open-view/chat6.html' };
+      // Discourse埋め込みスクリプトの設定
+      DiscourseEmbed = {
+        discourseUrl: 'https://extestdomain.discourse.group/', 
+        discourseEmbedUrl: window.location.href
+      };
+
       (function() {
-        var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+        var d = document.createElement('script'); 
+        d.type = 'text/javascript'; 
+        d.async = true;
         d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
       })();
 
-      // メッセージ送信関数
+      // トピック内のメッセージを取得して表示
+      async function loadMessages(topic_id) {
+        const apiUrl = `https://extestdomain.discourse.group/t/${topic_id}.json`;
+        const response = await fetch(apiUrl);
+        const result = await response.json();
+
+        const chat = document.getElementById('chat');
+        chat.innerHTML = ''; // メッセージ表示エリアをクリア
+
+        result.post_stream.posts.forEach(post => {
+          const messageElement = document.createElement('div');
+          messageElement.className = post.username === 'highmans' ? 'message user' : 'message other';
+          messageElement.innerHTML = `<div class="bubble">${post.cooked}</div>`;
+          chat.appendChild(messageElement);
+        });
+      }
+
+      // 初回ロード時にトピックメッセージを表示
+      const topicId = document.querySelector('#topicId').value;
+      loadMessages(topicId);
+
+      // メッセージ送信機能
       async function sendReply(topic_id, message) {
         const apiUrl = 'https://extestdomain.discourse.group/posts';
         const apiKey = '747b1a9d003b077c87e937fa8e20bf2d0ed149f3a0189d7ccbe341aed792220b';
@@ -125,17 +145,13 @@
         const result = await response.json();
         if (response.ok) {
           alert("返信が投稿されました！");
-          const chat = document.getElementById('chat');
-          const newMessage = document.createElement('div');
-          newMessage.className = 'message user';
-          newMessage.innerHTML = `<div class="bubble">${message}</div>`;
-          chat.appendChild(newMessage);
+          loadMessages(topic_id);  // 新しいメッセージを取得して表示
         } else {
           alert("エラーが発生しました: " + result.message);
         }
       }
 
-      // 送信イベント
+      // 返信ボタンのクリックイベント
       document.querySelector('#sendReplyButton').addEventListener('click', function() {
         const message = document.querySelector('#message').value;
         const topicId = document.querySelector('#topicId').value;
@@ -144,7 +160,7 @@
           return;
         }
         sendReply(topicId, message);
-        document.querySelector('#message').value = '';  // 送信後にテキストエリアをクリア
+        document.querySelector('#message').value = '';  // メッセージ送信後クリア
       });
 
       // カウントダウンタイマー
