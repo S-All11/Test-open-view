@@ -94,8 +94,8 @@
         discourseEmbedUrl: window.location.href
       };
 
-      // DOMContentLoadedイベントを使用してスクリプトの実行タイミングを調整
-      document.addEventListener('DOMContentLoaded', function() {
+      // 'load' イベントを使用してスクリプトを実行
+      window.addEventListener('load', function() {
         var d = document.createElement('script'); 
         d.type = 'text/javascript'; 
         d.async = true;
