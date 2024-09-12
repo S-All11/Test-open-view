@@ -164,7 +164,7 @@
       });
 
       // カウントダウンタイマー
-      let timeLeft = 20;  // 20秒 (0.34分)
+      let timeLeft = 10;  // 10秒 (0.167分)
       const countdownElement = document.getElementById('countdown');
 
       function updateCountdown() {
@@ -174,12 +174,12 @@
         if (timeLeft > 0) {
           timeLeft--;
         } else {
-          alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
+          // alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
           // document.querySelector('#sendReplyButton').disabled = true;  // ボタン無効化
-          // document.getElementById('showAlertButton').addEventListener('click', () => {
-          // alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。'); // アラートを表示
-          //   window.location.href = 'https://s-all11.github.io/Test-open-view/'; // リンク先にリダイレクト
-          //   });
+          document.getElementById('showAlertButton').addEventListener('click', () => {
+          alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。'); // アラートを表示
+            window.location.href = 'https://s-all11.github.io/Test-open-view/'; // リンク先にリダイレクト
+            });
         }
       }
 
