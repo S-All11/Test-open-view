@@ -25,3 +25,5 @@ https://s-all11.github.io/Test-open-view/chat6.html
 https://s-all11.github.io/Test-open-view/chat7.html
 
 https://s-all11.github.io/Test-open-view/test_disq.html
+
+https://s-all11.github.io/Test-open-view/test_menu_page.html
