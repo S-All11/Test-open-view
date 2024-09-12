@@ -94,13 +94,18 @@
         discourseEmbedUrl: window.location.href
       };
 
-      (function() {
+      // DOMContentLoadedイベントを使用してスクリプトの実行タイミングを調整
+      document.addEventListener('DOMContentLoaded', function() {
         var d = document.createElement('script'); 
         d.type = 'text/javascript'; 
         d.async = true;
         d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
-      })();
+
+        // 初回ロード時にトピックメッセージを表示
+        const topicId = document.querySelector('#topicId').value;
+        loadMessages(topicId);
+      });
 
       // トピック内のメッセージを取得して表示
       async function loadMessages(topic_id) {
@@ -118,10 +123,6 @@
           chat.appendChild(messageElement);
         });
       }
-
-      // 初回ロード時にトピックメッセージを表示
-      const topicId = document.querySelector('#topicId').value;
-      loadMessages(topicId);
 
       // メッセージ送信機能
       async function sendReply(topic_id, message) {
@@ -174,10 +175,8 @@
         if (timeLeft > 0) {
           timeLeft--;
         } else {
-          // alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
-          // document.querySelector('#sendReplyButton').disabled = true;  // ボタン無効化
           document.getElementById('showAlertButton').addEventListener('click', () => {
-          alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。'); // アラートを表示
+          alert('時間になりましたアラートを表示します\nOKを押すと次のページを表示します'); // アラートを表示
             window.location.href = 'https://s-all11.github.io/Test-open-view/'; // リンク先にリダイレクト
             });
         }
