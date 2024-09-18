@@ -91,6 +91,7 @@
       // Discourse埋め込みスクリプトの設定
       DiscourseEmbed = {
         discourseUrl: 'https://extestdomain.discourse.group/', 
+        // discourseEmbedUrl: window.location.href
         discourseEmbedUrl: window.location.href
       };
 
@@ -136,8 +137,8 @@
             'Authorization': `Bearer ${apiKey}`  // ここでAPIキーをヘッダーに追加
           },
           body: JSON.stringify({
-            api_username: username,
-            topic_id: topic_id,
+            api_username: highmans,
+            topic_id: 12,
             raw: message
           })
         });
