@@ -137,8 +137,9 @@
             'Authorization': `Bearer ${apiKey}`  // ここでAPIキーをヘッダーに追加
           },
           body: JSON.stringify({
-            api_username: highmans,
-            topic_id: 12,
+            api_key: apiKey,
+            api_username: username,
+            topic_id: topic_id,
             raw: message
           })
         });
