@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web AI Chat</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 10px;
+        }
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.user .bubble {
+            background-color: #d2d205;
+            color: #333;
+        }
+        .message.other .bubble {
+            background-color: #555;
+            color: #f0f0f0;
+        }
+        .bubble {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+        #replyForm {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d2d205;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #countdown {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #d2d205;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>AI Web Chat</h1>
+        
+        <!-- メッセージ表示エリア -->
+        <div id="chat"></div>
+
+        <!-- カウントダウンタイマー -->
+        <div id="countdown">残り時間: 00:01:00</div>
+
+        <!-- 返信フォーム -->
+        <div id="replyForm">
+            <textarea id="message" placeholder="メッセージを入力してください"></textarea>
+            <input type="hidden" id="topicId" value="12">
+            <button type="submit" id="sendReplyButton">送信</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+      // Discourse埋め込みスクリプトの設定
+      DiscourseEmbed = {
+        discourseUrl: 'https://extestdomain.discourse.group/', 
+        discourseEmbedUrl: window.location.href
+      };
+
+      (function() {
+        var d = document.createElement('script'); 
+        d.type = 'text/javascript'; 
+        d.async = true;
+        d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+      })();
+
+      // トピック内のメッセージを取得して表示
+      async function loadMessages(topic_id) {
+        const apiUrl = `https://extestdomain.discourse.group/t/${topic_id}.json`;
+        const response = await fetch(apiUrl);
+        const result = await response.json();
+
+        const chat = document.getElementById('chat');
+        chat.innerHTML = ''; // メッセージ表示エリアをクリア
+
+        result.post_stream.posts.forEach(post => {
+          const messageElement = document.createElement('div');
+          messageElement.className = post.username === 'highmans' ? 'message user' : 'message other';
+          messageElement.innerHTML = `<div class="bubble">${post.cooked}</div>`;
+          chat.appendChild(messageElement);
+        });
+      }
+
+      // 初回ロード時にトピックメッセージを表示
+      const topicId = document.querySelector('#topicId').value;
+      loadMessages(topicId);
+
+      // メッセージ送信機能
+      async function sendReply(topic_id, message) {
+        const apiUrl = 'https://extestdomain.discourse.group/posts';
+        const apiKey = 'd379e0f07b582354f32902285c72c4f8a8a03ba9b2bfb575de8e974c2e5ee15b';
+        const username = 'highmans';
+
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            api_key: d379e0f07b582354f32902285c72c4f8a8a03ba9b2bfb575de8e974c2e5ee15b,
+            api_username: highmans,
+            topic_id: 12,
+            raw: message
+          })
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          alert("返信が投稿されました！");
+          loadMessages(topic_id);  // 新しいメッセージを取得して表示
+        } else {
+          alert("エラーが発生しました: " + result.message);
+        }
+      }
+
+      // 返信ボタンのクリックイベント
+      document.querySelector('#sendReplyButton').addEventListener('click', function() {
+        const message = document.querySelector('#message').value;
+        const topicId = document.querySelector('#topicId').value;
+        if (message.trim() === "") {
+          alert("メッセージを入力してください");
+          return;
+        }
+        sendReply(topicId, message);
+        document.querySelector('#message').value = '';  // メッセージ送信後クリア
+      });
+
+      // カウントダウンタイマー
+      let timeLeft = 60;  // 60秒 (1分)
+      const countdownElement = document.getElementById('countdown');
+
+      function updateCountdown() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        countdownElement.textContent = `残り時間: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft > 0) {
+          timeLeft--;
+        } else {
+        // 利用時間終了アラートを表示
+        alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
+        // アラートのOKボタンを押した後に新しいタブで指定したURLを開く
+        let newTab = window.open('about:blank', '_blank');  // 一旦空のタブを開く
+        newTab.location.href = 'https://s-all11.github.io/Test-open-view/';  // リダイレクト先のURLに変更
+        window.close();  // 現在のタブを閉じる
+        }
+      }
+
+      setInterval(updateCountdown, 1000);  // 1秒ごとにカウントダウン更新
+    </script>
+</body>
+</html>
