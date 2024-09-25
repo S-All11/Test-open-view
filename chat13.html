@@ -23,6 +23,24 @@
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
+
+
+var Tawk_API = Tawk_API || {};
+    Tawk_API.onLoad = function() {
+        var chatIframe = document.querySelector('iframe[src*="tawk.to"]');
+        if (chatIframe) {
+            chatIframe.style.position = "fixed";
+            chatIframe.style.top = "50%";
+            chatIframe.style.left = "50%";
+            chatIframe.style.transform = "translate(-50%, -50%)";
+            chatIframe.style.width = "400px"; /* チャットウィジェットの幅 */
+            chatIframe.style.height = "600px"; /* チャットウィジェットの高さ */
+            chatIframe.style.zIndex = "1000"; /* 前面に表示させるためのZインデックス */
+        }
+    };
+
+
+
     var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
     (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
