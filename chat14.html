@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web AI Chat</title>
+    <style>
+        body {
+            background-color: #333;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #444;
+            border-radius: 10px;
+        }
+        .message {
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .message.user {
+            justify-content: flex-end;
+        }
+        .message.user .bubble {
+            background-color: #d2d205;
+            color: #333;
+        }
+        .message.other .bubble {
+            background-color: #555;
+            color: #f0f0f0;
+        }
+        .bubble {
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+        #replyForm {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #d2d205;
+            color: #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #countdown {
+            margin: 20px 0;
+            font-size: 18px;
+            color: #d2d205;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>AI Web Chat</h1>
+
+        <!-- カウントダウンタイマー -->
+        <div id="countdown">残り時間: 00:01:00</div>
+
+    <script type="text/javascript">
+      
+      // カウントダウンタイマー
+      let timeLeft = 60;  // 60秒 (1分)
+      const countdownElement = document.getElementById('countdown');
+
+      function updateCountdown() {
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+        countdownElement.textContent = `残り時間: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        if (timeLeft > 0) {
+          timeLeft--;
+        } else {
+        // 利用時間終了アラートを表示
+        alert('プラン終了のお時間となりました。\n延長される場合は料金表から、\nご希望のプランお選びください。');
+        // アラートのOKボタンを押した後に新しいタブで指定したURLを開く
+        let newTab = window.open('about:blank', '_blank');  // 一旦空のタブを開く
+        newTab.location.href = 'https://s-all11.github.io/Test-open-view/';  // リダイレクト先のURLに変更
+        window.close();  // 現在のタブを閉じる
+        }
+      }
+
+      setInterval(updateCountdown, 1000);  // 1秒ごとにカウントダウン更新
+    </script>
+</body>
+</html>
