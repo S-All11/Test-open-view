@@ -43,9 +43,10 @@
       const countdownElement = document.getElementById('countdown');
 
       function updateCountdown() {
+        const hours = Math.floor(timeLeft / 3600);
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
-        countdownElement.textContent = `残り時間: ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        countdownElement.textContent = `残り時間: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         if (timeLeft > 0) {
           timeLeft--;
         } else {
