@@ -67,6 +67,29 @@
             text-decoration: none;
             margin: 0 10px;
         }
+        
+        .auth-links {
+        display: flex;
+        gap: 15px;
+        }
+
+        .auth-links a {
+        color: white;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        }
+
+        .auth-links a:hover {
+        text-decoration: underline;
+        }
+
+        /* アイコンのスタイル */
+        .icon {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        }
     </style>
 </head>
 <body>
@@ -76,6 +99,16 @@
             <img src="images/logo.jpg" alt="サイトロゴ">
         </a>
         <h1>AIチャットサービス</h1>
+
+        <div class="auth-links">
+            <a href="#" class="register-link">
+              <img src="register-icon.png" alt="会員登録" class="icon"> 会員登録
+            </a>
+            <a href="#" class="login-link">
+              <img src="login-icon.png" alt="ログイン" class="icon"> ログイン
+            </a>
+        </div>
+
     </header>
         <div style="font-size:18px;">只今の営業中18:00~23:00</div>
 
