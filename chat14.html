@@ -39,7 +39,7 @@
       
       
       // カウントダウンタイマー
-      let timeLeft = 3610;  // 3610秒 (60分+10秒)
+      let timeLeft = 999999;  // 999999秒 (1分)
       const countdownElement = document.getElementById('countdown');
 
       function updateCountdown() {
@@ -59,7 +59,7 @@
         }
       }
 
-      setInterval(updateCountdown, 10);  // 1秒ごとにカウントダウン更新
+      setInterval(updateCountdown, 5);  // 1秒ごとにカウントダウン更新
     </script>
 </body>
 </html>
