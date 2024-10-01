@@ -34,7 +34,7 @@
         })();
 
         // カウントダウンタイマーの変数設定
-        let countdownTime = 300; // 5分 (300秒)
+        let countdownTime = 60; // 1分 (60秒)
         let timerInterval;
 
         // チャットウィジェット内に残り時間を表示する関数
@@ -65,14 +65,14 @@
         // カウントダウン終了時のメッセージ
         function endCountdownMessage() {
             Tawk_API.addEvent('visitorMessage', {
-                message: '時間切れです。ありがとうございました！'
+                message: 'ご利用中頂いているサービス終了のお時間となりました。'
             });
         }
 
         // チャットのメッセージ受信時にカウントダウンを開始する例
         Tawk_API.onLoad = function() {
             // ここで「カウントダウン開始」のメッセージでタイマーを開始
-            Tawk_API.onChatMaximized = function(){
+            Tawk_API.Tawk_API.onMessageSent = function(){
                 startCountdown(); // チャットウィジェットが開かれたときにカウントダウンを開始
             };
         };
