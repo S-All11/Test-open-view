@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testwebAIchat</title>
+    <style>
+        body {
+            background-color: #333333;
+            color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #02c24f;
+        }
+    </style>
+</head>
+<body>
+    <h1>チャットタイマー</h1>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function(){
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1i8jejsn1'; // Tawk.toウィジェットのスクリプトURL
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+
+        // カウントダウンタイマーの変数設定
+        let countdownTime = 300; // 5分 (300秒)
+        let timerInterval;
+
+        // チャットウィジェット内に残り時間を表示する関数
+        function updateChatWidget(time) {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            let timeString = `${minutes}分${seconds}秒`;
+
+            // Tawk.toのAPIを使用してメッセージを更新
+            Tawk_API.addEvent('visitorMessage', {
+                message: `残り時間: ${timeString}`
+            });
+        }
+
+        // カウントダウンタイマーを開始する関数
+        function startCountdown() {
+            timerInterval = setInterval(function() {
+                if (countdownTime > 0) {
+                    countdownTime--;
+                    updateChatWidget(countdownTime); // 残り時間を更新
+                } else {
+                    clearInterval(timerInterval); // タイマー停止
+                    endCountdownMessage(); // カウントダウン終了メッセージを送信
+                }
+            }, 1000);
+        }
+
+        // カウントダウン終了時のメッセージ
+        function endCountdownMessage() {
+            Tawk_API.addEvent('visitorMessage', {
+                message: '時間切れです。ありがとうございました！'
+            });
+        }
+
+        // チャットのメッセージ受信時にカウントダウンを開始する例
+        Tawk_API.onLoad = function() {
+            // ここで「カウントダウン開始」のメッセージでタイマーを開始
+            Tawk_API.onChatMaximized = function(){
+                startCountdown(); // チャットウィジェットが開かれたときにカウントダウンを開始
+            };
+        };
+    </script>
+    <!--End of Tawk.to Script-->
+</body>
+</html>
