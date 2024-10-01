@@ -6,74 +6,72 @@
     <title>testwebAIchat</title>
     <style>
         body {
-            background-color: #333333;
-            color: #f0f0f0;
-            font-family: Arial, sans-serif;
+            background-color: #333333; /* 背景色を黒系のグレーに設定 */
+            color: #f0f0f0; /* 文字色を白に設定 */
+            font-family: Arial, sans-serif; /* フォントの設定 */
             margin: 0;
             padding: 0;
-            text-align: center;
+            text-align: center; /* テキストを中央揃え */
         }
         h1, h2, h3, h4, h5, h6 {
+            color: #02c24f; /* 見出しの文字色を青に設定 */
+        }
+        #timer {
+            font-size: 24px;
             color: #02c24f;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <h1>チャットタイマー</h1>
+    <h1>AIチャット</h1>
+    <div id="timer">00:00:00</div> <!-- カウントダウンタイマーの初期表示 -->
 
     <!--Start of Tawk.to Script-->
     <script type="text/javascript">
-        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
         (function(){
-            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-            s1.async = true;
-            s1.src = 'https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1i8jejsn1'; // Tawk.toウィジェットのスクリプトURL
-            s1.charset = 'UTF-8';
-            s1.setAttribute('crossorigin', '*');
-            s0.parentNode.insertBefore(s1, s0);
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        s1.src='https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1i8jejsn1';// Tawk.toウィジェットのURLを記入
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
         })();
-
-        // カウントダウンタイマーの変数設定
-        let countdownTime = 60; // 1分 (60秒)
+        
+        // タイマー用変数
+        let countdownTime = 0; // 初期状態は00:00:00
         let timerInterval;
 
-        // チャットウィジェット内に残り時間を表示する関数
-        function updateChatWidget(time) {
+        // タイマーをフォーマットして表示する関数
+        function updateTimerDisplay(time) {
             let minutes = Math.floor(time / 60);
             let seconds = time % 60;
-            let timeString = `${minutes}分${seconds}秒`;
-
-            // Tawk.toのAPIを使用してメッセージを更新
-            Tawk_API.addEvent('visitorMessage', {
-                message: `残り時間: ${timeString}`
-            });
+            let formattedTime = `00:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            document.getElementById("timer").innerText = formattedTime;
         }
 
-        // カウントダウンタイマーを開始する関数
-        function startCountdown() {
+        // タイマー開始関数
+        function startCountdown(duration) {
+            countdownTime = duration;
+            clearInterval(timerInterval); // 既存のタイマーがある場合停止
             timerInterval = setInterval(function() {
                 if (countdownTime > 0) {
                     countdownTime--;
-                    updateChatWidget(countdownTime); // 残り時間を更新
+                    updateTimerDisplay(countdownTime); // 残り時間を更新
                 } else {
                     clearInterval(timerInterval); // タイマー停止
-                    endCountdownMessage(); // カウントダウン終了メッセージを送信
                 }
-            }, 1000);
+            }, 1000); // 1秒ごとにカウントダウン
         }
 
-        // カウントダウン終了時のメッセージ
-        function endCountdownMessage() {
-            Tawk_API.addEvent('visitorMessage', {
-                message: 'ご利用中頂いているサービス終了のお時間となりました。'
-            });
-        }
-
-        // チャットのメッセージ受信時にカウントダウンを開始する例
+        // Tawk.toがロードされた後のイベントリスナー設定
         Tawk_API.onLoad = function() {
-            // ここで「カウントダウン開始」のメッセージでタイマーを開始
-            Tawk_API.Tawk_API.onMessageSent = function(){
-                startCountdown(); // チャットウィジェットが開かれたときにカウントダウンを開始
+            updateTimerDisplay(0); // 初期表示
+
+            // メッセージが送信されたらタイマーを1分にセットして開始
+            Tawk_API.onMessageSent = function() {
+                startCountdown(60); // 60秒（1分）でカウントダウンを開始
             };
         };
     </script>
