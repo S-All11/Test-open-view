@@ -74,6 +74,11 @@
                 startCountdown(60); // 60秒（1分）でカウントダウンを開始
             };
         };
+
+        window.Tawk_API = window.Tawk_API || {};
+        window.Tawk_API.onBeforeLoad = function(){
+        window.Tawk_API.maximize();
+        };
     </script>
     <!--End of Tawk.to Script-->
 </body>
