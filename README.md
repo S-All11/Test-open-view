@@ -1,4 +1,6 @@
 Please visit to here(仮のトップページのリンク) : https://s-all11.github.io/Test-open-view/
+旧リンク : https://s-all11.github.io/Test-open-view/index1.html
+旧リンク2 : https://s-all11.github.io/Test-open-view/index2.html
 
 Disqusのテストページ : https://s-all11.github.io/Test-open-view/chat1.html
 
@@ -26,6 +28,3 @@ https://s-all11.github.io/Test-open-view/chat14.html
 https://s-all11.github.io/Test-open-view/chat15.html
 
 https://s-all11.github.io/Test-open-view/test_disq.html
-
-https://s-all11.github.io/Test-open-view/old_index.html
-https://s-all11.github.io/Test-open-view/new_index.html
