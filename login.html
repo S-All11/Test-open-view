@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333;
+            color: #f0f0f0;
+            text-align: center;
+            padding-top: 50px;
+        }
+        form {
+            background-color: #444;
+            padding: 20px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        input[type="text"], input[type="password"] {
+            width: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #02c24f;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #028a38;
+        }
+    </style>
+</head>
+<body>
+    <h1>ログイン</h1>
+    <form action="/login" method="post">
+        <label for="username">ユーザー名:</label><br>
+        <input type="text" id="username" name="username" required><br>
+        <label for="password">パスワード:</label><br>
+        <input type="password" id="password" name="password" required><br>
+        <input type="submit" value="ログイン">
+    </form>
+</body>
+</html>
