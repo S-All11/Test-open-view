@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キャンペーンサイト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header nav {
+            display: flex;
+            justify-content: space-around;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+        }
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-images img {
+            width: 100%;
+            max-width: 100%;
+            flex-shrink: 0;
+        }
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .dots span {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .active-dot {
+            background-color: #333;
+        }
+        .info-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .info-box {
+            width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .scrollable-section {
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        footer ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        footer ul li {
+            margin: 0 15px;
+        }
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="#">トップページ</a>
+        <a href="#">利用案内</a>
+        <a href="#">ご利用料金</a>
+        <a href="#">スタッフ情報</a>
+        <a href="#">よくあるご質問</a>
+        <a href="#">ヘルプページ</a>
+        <a href="#">ログイン</a>
+        <a href="#">会員登録</a>
+    </nav>
+</header>
+
+<div class="content">
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="image1.jpg" alt="キャンペーン1">
+            <img src="image2.jpg" alt="キャンペーン2">
+            <img src="image3.jpg" alt="キャンペーン3">
+            <img src="image4.jpg" alt="キャンペーン4">
+            <img src="image5.jpg" alt="キャンペーン5">
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prev">‹</button>
+            <button class="carousel-button" id="next">›</button>
+        </div>
+        <div class="dots">
+            <span class="dot active-dot" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+        </div>
+    </div>
+
+    <div class="info-section">
+        <div class="info-box">新着情報</div>
+        <div class="info-box">最新情報やキャンペーン</div>
+        <div class="info-box">SNS投稿情報</div>
+    </div>
+
+    <div class="scrollable-section">
+        <h3>スタッフのひとこと</h3>
+        <!-- ここにSNSの投稿や最新のスタッフコメントをスクロール表示 -->
+        <p>スタッフA: 本日も頑張ります！</p>
+        <p>スタッフB: 新しいキャンペーンをお見逃しなく。</p>
+        <p>スタッフC: 週末のイベントに注目！</p>
+        <!-- その他投稿が続く -->
+    </div>
+</div>
+
+<footer>
+    <ul>
+        <li><a href="#">このサイトについて</a></li>
+        <li><a href="#">会社概要</a></li>
+        <li><a href="#">利用規約</a></li>
+        <li><a href="#">プライバシーポリシー</a></li>
+        <li><a href="#">ご要望</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+    </ul>
+</footer>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-images img');
+    const dots = document.querySelectorAll('.dot');
+
+    document.getElementById('next').addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+    });
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            currentSlide = parseInt(e.target.dataset.index);
+            updateCarousel();
+        });
+    });
+
+    function updateCarousel() {
+        const offset = -currentSlide * 100;
+        document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+        dots.forEach(dot => dot.classList.remove('active-dot'));
+        dots[currentSlide].classList.add('active-dot');
+    }
+</script>
+
+</body>
+</html>
