@@ -3,131 +3,213 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>testwebAIchat</title>
+    <title>AIチャットサービス</title>
     <style>
         body {
-            background-color: #444; /* 背景色を黒系のグレーに設定 */
-            color: #f0f0f0; /* 文字色を白に設定 */
-            font-family: Arial, sans-serif; /* フォントの設定 */
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
             margin: 0;
             padding: 0;
-            text-align: center; /* テキストを中央揃え */
         }
-        h1, h2, h3, h4, h5, h6 {
-            color: #eee8b1; /* 見出しの文字色を白に設定 */
-        }
-        .contact-icons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* 4列表示 */
-            gap: 40px; /* アイコン間の間隔 */
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .contact-icons a {
-            display: block;
-            text-align: center; /* 名前とオンライン状況を中央揃え */
-            width: 100px; /* アイコン全体の幅 */
-            font-size: 12px;
-            color: #028e12; /* 名前とオンライン状況の文字色 */
-        }
-        .contact-icons img {
-            width: 80px; /* アイコンのサイズ */
-            height: 80px; /* アイコンのサイズ */
-            object-fit: contain; /* アイコンの比率を保持 */
-        }
-        @media (max-width: 600px) {
-            .contact-icons {
-                grid-template-columns: repeat(2, 1fr); /* 小さい画面用に2列表示 */
-            }
-            .contact-icons img {
-                width: 40px; /* 小さい画面用のアイコンサイズ */
-                height: 40px; /* 小さい画面用のアイコンサイズ */
-            }
-        }
-        /* ヘッダーにロゴとリンクを追加 */
-        header {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 5px;
+        header, footer {
             background-color: #333;
-            height: 40px
-        }
-        header img {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-        }
-        footer {
-            margin-top: 20px;
-            background-color: #333;
+            color: #fff;
             padding: 20px;
+            text-align: center;
         }
-        footer a {
+        header nav {
+            display: flex;
+            justify-content: space-around;
+        }
+        header nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 10px;
+            padding: 10px;
         }
-        .signs{
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-images img {
+            width: 100%;
+            max-width: 100%;
+            flex-shrink: 0;
+        }
+        .carousel-buttons {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .carousel-button {
+            background-color: rgba(0, 0, 0, 0.5);
             color: #fff;
-            text-align: right;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .dots {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .dots span {
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            cursor: pointer;
+        }
+        .active-dot {
             background-color: #333;
+        }
+        .info-section {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+        }
+        .info-box {
+            width: 30%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .scrollable-section {
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+        }
+        footer ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        footer ul li {
+            margin: 0 15px;
+        }
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div class="signs">
-        <button href="signin.html">ログイン</button>
-        <button href="signup.html">会員登録</button>
-    </div>
-    <!-- ヘッダーにロゴを追加 -->
-    <header>
-        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">
-            <img src="images/logo.jpg" alt="サイトロゴ">
-        </a>
-        <h1>AIチャットサービス</h1>
-    </header>
 
-        <div style="font-size:18px;">只今の営業中18:00~23:00</div>
+<header>
+    <nav>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">トップページ</a>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">利用案内</a>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">ご利用料金</a>
+        <a href="https://s-all11.github.io/Test-open-view/">キャスト情報</a>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">よくあるご質問</a>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">ヘルプページ</a>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">ログイン</a>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">会員登録</a>
+    </nav>
+</header>
 
-    <!-- アバターのアイコンのセクション -->
-    <div class="contact-icons">
-        <!-- 各ユーザーの名前とオンライン状況を変数に格納 -->
-        <script>
-            const users = [
-                {name: "Cast_A", status: "オンライン", img: "icon_images1.jpg", link: "chat1.html"},
-                {name: "Cast_B", status: "オンライン", img: "icon_images2.jpg", link: "chat2_1.html"},
-                {name: "Cast_C", status: "オフライン", img: "icon_images3.png", link: "chat3.html"},
-                {name: "Cast_D", status: "オフライン", img: "icon_images4.png", link: "chat4.html"},
-                {name: "Cast_E", status: "オンライン", img: "icon_images5.png", link: "chat13.html"},
-                {name: "Cast_F", status: "オフライン", img: "icon_images6.jpg", link: "chat14.html"},
-                {name: "Cast_G", status: "オフライン", img: "icon_images7.png", link: "chat15.html"},
-                {name: "Cast_H", status: "オフライン", img: "icon_images8.jpg", link: "chat16.html"},
-                
-            ];
-
-            users.forEach(user => {
-                document.write(`
-                    <a href="${user.link}" target="_blank">
-                        <img src="${user.img}" alt="${user.name} icon">
-                        ${user.name}
-                        <br>${user.status}
-                    </a>
-                `);
-            });
-        </script>
+<div class="content">
+    <div class="carousel">
+        <div class="carousel-images">
+            <img src="1.jpg" alt="キャンペーン1">
+            <img src="2.jpg" alt="キャンペーン2">
+            <img src="3.jpg" alt="キャンペーン3">
+            <img src="4.jpg" alt="キャンペーン4">
+            <img src="5.jpg" alt="キャンペーン5">
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prev">‹</button>
+            <button class="carousel-button" id="next">›</button>
+        </div>
+        <div class="dots">
+            <span class="dot active-dot" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+        </div>
     </div>
 
-    <!-- フッターにリンク集を追加 -->
-    <footer>
-        <a href="https://github.com/S-All11/Test-open-view">トップページ</a>
-        <a href="link2.html">会社概要</a>
-        <a href="利用規約.md">利用案内</a>
-        <a href="利用規約.md">利用規約</a>
-        <a href="利用規約.html">プライバシーポリシー</a>
-        <a href="link5.html">お問い合わせ</a>
-        <a href="index1.html">前のサイト</a>
-        <a href="index2.html">次のサイト</a>
-    </footer>
+    <div class="info-section">
+        <div class="info-box">新着情報</div>
+        <div class="info-box">最新情報やキャンペーン</div>
+        <div class="info-box">SNS投稿情報</div>
+    </div>
+
+    <div class="scrollable-section">
+        <h3>キャストのひとこと</h3>
+        <!-- ここにSNSの投稿や最新のキャストコメントをスクロール表示 -->
+        <p>キャストA: 本日も頑張ります！</p>
+        <p>キャストB: 新しいキャンペーンをお見逃しなく。</p>
+        <p>キャストC: 週末のイベントに注目！</p>
+        <p>キャストD: 週末のイベントに注目！</p>
+        <p>キャストE: 週末のイベントに注目！</p>
+        <p>キャストF: 週末のイベントに注目！</p>
+        <p>キャストG: 週末のイベントに注目！</p>
+        <p>キャストH: 週末のイベントに注目！</p>
+        <!-- その他投稿が続く -->
+    </div>
+</div>
+
+<footer>
+    <ul>
+        <li><a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">このサイトについて</a></li>
+        <li><a href="#">会社概要</a></li>
+        <li><a href="https://s-all11.github.io/Test-open-view/利用規約.md">利用規約</a></li>
+        <li><a href="https://s-all11.github.io/Test-open-view/利用規約.html">プライバシーポリシー</a></li>
+        <li><a href="#">ご要望</a></li>
+        <li><a href="#">お問い合わせ</a></li>
+    </ul>
+</footer>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-images img');
+    const dots = document.querySelectorAll('.dot');
+
+    document.getElementById('next').addEventListener('click', () => {
+        currentSlide = (currentSlide + 1) % slides.length;
+        updateCarousel();
+    });
+
+    document.getElementById('prev').addEventListener('click', () => {
+        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+        updateCarousel();
+    });
+
+    dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+            currentSlide = parseInt(e.target.dataset.index);
+            updateCarousel();
+        });
+    });
+
+    function updateCarousel() {
+        const offset = -currentSlide * 100;
+        document.querySelector('.carousel-images').style.transform = `translateX(${offset}%)`;
+        dots.forEach(dot => dot.classList.remove('active-dot'));
+        dots[currentSlide].classList.add('active-dot');
+    }
+</script>
+
 </body>
 </html>

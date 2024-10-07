@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>testwebAIchat</title>
+    <style>
+        body {
+            background-color: #444; /* 背景色を黒系のグレーに設定 */
+            color: #f0f0f0; /* 文字色を白に設定 */
+            font-family: Arial, sans-serif; /* フォントの設定 */
+            margin: 0;
+            padding: 0;
+            text-align: center; /* テキストを中央揃え */
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #eee8b1; /* 見出しの文字色を白に設定 */
+        }
+        .contact-icons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* 4列表示 */
+            gap: 40px; /* アイコン間の間隔 */
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .contact-icons a {
+            display: block;
+            text-align: center; /* 名前とオンライン状況を中央揃え */
+            width: 100px; /* アイコン全体の幅 */
+            font-size: 12px;
+            color: #028e12; /* 名前とオンライン状況の文字色 */
+        }
+        .contact-icons img {
+            width: 80px; /* アイコンのサイズ */
+            height: 80px; /* アイコンのサイズ */
+            object-fit: contain; /* アイコンの比率を保持 */
+        }
+        @media (max-width: 600px) {
+            .contact-icons {
+                grid-template-columns: repeat(2, 1fr); /* 小さい画面用に2列表示 */
+            }
+            .contact-icons img {
+                width: 40px; /* 小さい画面用のアイコンサイズ */
+                height: 40px; /* 小さい画面用のアイコンサイズ */
+            }
+        }
+        /* ヘッダーにロゴとリンクを追加 */
+        header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            background-color: #333;
+            height: 40px
+        }
+        header img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+        footer {
+            margin-top: 20px;
+            background-color: #333;
+            padding: 20px;
+        }
+        footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .signs{
+            color: #fff;
+            text-align: right;
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="signs">
+        <button href="signin.html">ログイン</button>
+        <button href="signup.html">会員登録</button>
+    </div>
+    <!-- ヘッダーにロゴを追加 -->
+    <header>
+        <a href="https://s-all11.github.io/Test-open-view/index_top_sample.html">
+            <img src="images/logo.jpg" alt="サイトロゴ">
+        </a>
+        <h1>AIチャットサービス</h1>
+    </header>
+
+        <div style="font-size:18px;">只今の営業中18:00~23:00</div>
+
+    <!-- アバターのアイコンのセクション -->
+    <div class="contact-icons">
+        <!-- 各ユーザーの名前とオンライン状況を変数に格納 -->
+        <script>
+            const users = [
+                {name: "Cast_A", status: "オンライン", img: "icon_images1.jpg", link: "chat1.html"},
+                {name: "Cast_B", status: "オンライン", img: "icon_images2.jpg", link: "chat2_1.html"},
+                {name: "Cast_C", status: "オフライン", img: "icon_images3.png", link: "chat3.html"},
+                {name: "Cast_D", status: "オフライン", img: "icon_images4.png", link: "chat4.html"},
+                {name: "Cast_E", status: "オンライン", img: "icon_images5.png", link: "chat13.html"},
+                {name: "Cast_F", status: "オフライン", img: "icon_images6.jpg", link: "chat14.html"},
+                {name: "Cast_G", status: "オフライン", img: "icon_images7.png", link: "chat15.html"},
+                {name: "Cast_H", status: "オフライン", img: "icon_images8.jpg", link: "chat16.html"},
+                
+            ];
+
+            users.forEach(user => {
+                document.write(`
+                    <a href="${user.link}" target="_blank">
+                        <img src="${user.img}" alt="${user.name} icon">
+                        ${user.name}
+                        <br>${user.status}
+                    </a>
+                `);
+            });
+        </script>
+    </div>
+
+    <!-- フッターにリンク集を追加 -->
+    <footer>
+        <a href="https://github.com/S-All11/Test-open-view">トップページ</a>
+        <a href="link2.html">会社概要</a>
+        <a href="利用規約.md">利用案内</a>
+        <a href="利用規約.md">利用規約</a>
+        <a href="利用規約.html">プライバシーポリシー</a>
+        <a href="link5.html">お問い合わせ</a>
+        <a href="index1.html">前のサイト</a>
+        <a href="index2.html">次のサイト</a>
+    </footer>
+</body>
+</html>
