@@ -128,45 +128,67 @@
 </header>
 
 <div class="content">
-    <<div class="carousel">
+    <div id="carouselExample" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
-          <!-- 画像1：リンク付き -->
-          <div class="carousel-item">
-            <a href="https://example.com/link1"> <!-- クリックでリンクへ飛ぶ -->
-              <img src="0.jpg" alt="告知画像1">
+          <!-- 画像1：最初の画像に`active`クラスを付ける -->
+          <div class="carousel-item active">
+            <a href="https://example.com/link1">
+              <img src="0.jpg" alt="告知画像1" class="d-block w-100">
             </a>
           </div>
-          
-          <!-- 画像2：リンク付き -->
+      
+          <!-- 画像2 -->
           <div class="carousel-item">
-            <a href="https://example.com/link2"> <!-- クリックでリンクへ飛ぶ -->
-              <img src="1.jpg" alt="告知画像2">
+            <a href="https://example.com/link2">
+              <img src="1.jpg" alt="告知画像2" class="d-block w-100">
             </a>
           </div>
-          
-          <!-- 画像3：リンク付き -->
+      
+          <!-- 画像3 -->
           <div class="carousel-item">
-            <a href="https://example.com/link3"> <!-- クリックでリンクへ飛ぶ -->
-              <img src="2.jpg" alt="告知画像3">
+            <a href="https://example.com/link3">
+              <img src="2.jpg" alt="告知画像3" class="d-block w-100">
             </a>
           </div>
-          
-          <!-- 画像4：リンク付き -->
+      
+          <!-- 画像4 -->
           <div class="carousel-item">
-            <a href="https://example.com/link4"> <!-- クリックでリンクへ飛ぶ -->
-              <img src="3.jpg" alt="告知画像4">
+            <a href="https://example.com/link4">
+              <img src="3.jpg" alt="告知画像4" class="d-block w-100">
             </a>
           </div>
-          
-          <!-- 画像5：リンク付き -->
+      
+          <!-- 画像5 -->
           <div class="carousel-item">
-            <a href="https://example.com/link5"> <!-- クリックでリンクへ飛ぶ -->
-              <img src="4.jpg" alt="告知画像5">
+            <a href="https://example.com/link5">
+              <img src="4.jpg" alt="告知画像5" class="d-block w-100">
             </a>
           </div>
         </div>
+      
+        <!-- 左右のコントロール -->
+        <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
       </div>
       
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prev">‹</button>
+            <button class="carousel-button" id="next">›</button>
+        </div>
+        <div class="dots">
+            <span class="dot active-dot" data-index="0"></span>
+            <span class="dot" data-index="1"></span>
+            <span class="dot" data-index="2"></span>
+            <span class="dot" data-index="3"></span>
+            <span class="dot" data-index="4"></span>
+        </div>
+    </div>
 
     <div class="info-section">
         <div class="info-box">新着情報</div>
