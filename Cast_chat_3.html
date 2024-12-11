@@ -19,19 +19,35 @@
     </style>
 </head>
 <body>
-
-<!--Start of Tawk.to Script-->
+<!-- Tawk.toのウィジェット -->
 <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-    s1.async=true;
-    s1.src='https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1iepglana';
-    s1.charset='UTF-8';
-    s1.setAttribute('crossorigin','*');
-    s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {};
+    Tawk_API.onLoad = function () {
+        console.log("Tawk.toがロードされました。");
+
+        // ページごとに異なる訪問者情報を設定
+        Tawk_API.setAttributes({
+            'page': 'page-3', // 各ページごとに一意の値を設定
+            'userID': 'user-' + Math.random().toString(36).substr(2, 9) // ランダムな一意ID
+        }, function (error) {
+            if (error) {
+                console.error("セッション属性の設定に失敗しました:", error);
+            } else {
+                console.log("セッション属性が設定されました。");
+            }
+        });
+    };
+
+    // Tawk.toのスクリプト
+    var Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1iepglana'; // 自分のプロパティIDに置き換え
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
-    </script>
-<!--End of Tawk.to Script-->
+</script>
 </body>
 </html>
