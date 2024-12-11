@@ -43,12 +43,15 @@
         });
     };
 
+    // ページごとに異なる一意IDを生成
+    var uniqueID = Math.random().toString(36).substr(2, 9);
+
     // Tawk.toのスクリプト
     var Tawk_LoadStart = new Date();
     (function () {
         var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
         s1.async = true;
-        s1.src = 'https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1iegdh6tn'; // 自分のプロパティIDに置き換え
+        s1.src = 'https://embed.tawk.to/1iegdh6tn/default?page=${uniqueID}`'; // 自分のプロパティIDに置き換え
         s1.charset = 'UTF-8';
         s1.setAttribute('crossorigin', '*');
         s0.parentNode.insertBefore(s1, s0);
@@ -56,3 +59,4 @@
 </script>
 </body>
 </html>
+<!-- https://embed.tawk.to/66f36f16e5982d6c7bb3d175/1iegdh6tn -->
