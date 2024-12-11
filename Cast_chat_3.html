@@ -25,6 +25,11 @@
     Tawk_API.onLoad = function () {
         console.log("Tawk.toがロードされました。");
 
+        // Cookieやローカルストレージをクリア
+        document.cookie = 'TawkConnectionTime=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        localStorage.removeItem('Tawk_Language');
+        localStorage.removeItem('TawkToID');
+
         // ページごとに異なる訪問者情報を設定
         Tawk_API.setAttributes({
             'page': 'page-3', // 各ページごとに一意の値を設定
