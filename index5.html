@@ -91,27 +91,8 @@
     </nav>
 </header>
 
- <!-- アバターのアイコンのセクション -->
- <div class="contact-icons">
-    <script>
-        const statuses = ["待機中", "対応中", "休憩中", "本日お休み"];
-        const users = [
-            {name: "Cast_A", status: 1, img: "icon_images1.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_1.html"},
-            {name: "Cast_B", status: 2, img: "icon_images2.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_2.html"},
-            {name: "Cast_C", status: 3, img: "icon_images3.png", link: "https://s-all11.github.io/Test-open-view/Cast_chat_3.html"}
-        ];
-
-        users.forEach(user => {
-            const statusText = statuses[user.status];
-            document.write(`
-                <a href="${user.link}" target="_blank">
-                    <img src="${user.img}" alt="${user.name} icon">
-                    ${user.name}
-                    <br><span>${statusText}</span>
-                </a>
-            `);
-        });
-    </script>
+<div class="contact-icons" id="contact-icons">
+    <!-- キャスト情報はJavaScriptで動的に挿入 -->
 </div>
 
 <footer>
@@ -124,6 +105,39 @@
         <li><a href="https://s-all11.github.io/Test-open-view/">お問い合わせ</a></li>
     </ul>
 </footer>
+
+<script>
+    const statuses = ["待機中", "対応中", "休憩中", "本日お休み"];
+    const users = [
+        {name: "Cast_A", status: 3, img: "icon_images1.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_1.html"},
+        {name: "Cast_B", status: 3, img: "icon_images2.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_2.html"},
+        {name: "Cast_C", status: 3, img: "icon_images3.png", link: "https://s-all11.github.io/Test-open-view/Cast_chat_3.html"}
+    ];
+
+    function updateStatuses() {
+        const container = document.getElementById("contact-icons");
+        container.innerHTML = ""; // 古い情報をクリア
+        users.forEach(user => {
+            const statusText = statuses[user.status];
+            const userElement = `
+                <a href="${user.link}" target="_blank">
+                    <img src="${user.img}" alt="${user.name} icon">
+                    ${user.name}
+                    <br><span>${statusText}</span>
+                </a>
+            `;
+            container.insertAdjacentHTML("beforeend", userElement);
+        });
+    }
+
+    // 1分ごとに状態を更新
+    setInterval(() => {
+        updateStatuses();
+    }, 60000);
+
+    // 初回描画
+    updateStatuses();
+</script>
 
 </body>
 </html>
