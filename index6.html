@@ -14,88 +14,129 @@
         }
         .contact-icons {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            grid-template-columns: repeat(3, 1fr); /* 3列表示 */
+            gap: 40px; /* アイコン間の間隔 */
             justify-content: center;
             margin: 20px 0;
         }
         .contact-icons a {
             display: block;
-            text-align: center;
-            width: 100px;
+            text-align: center; /* 名前とオンライン状況を中央揃え */
+            width: 100px; /* アイコン全体の幅 */
             font-size: 12px;
-            color: #028e12;
+            color: #028e12; /* 名前とオンライン状況の文字色 */
         }
         .contact-icons img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
+            width: 80px; /* アイコンのサイズ */
+            height: 80px; /* アイコンのサイズ */
+            object-fit: contain; /* アイコンの比率を保持 */
         }
         @media (max-width: 600px) {
             .contact-icons {
-                grid-template-columns: repeat(2, 1fr);
+                grid-template-columns: repeat(2, 1fr); /* 小さい画面用に2列表示 */
             }
             .contact-icons img {
-                width: 40px;
-                height: 40px;
+                width: 40px; /* 小さい画面用のアイコンサイズ */
+                height: 40px; /* 小さい画面用のアイコンサイズ */
             }
+        }
+        header, footer {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+        header nav {
+            display: flex;
+            justify-content: space-around;
+        }
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+        }
+        nav .logo {
+            width: 50px; /* 横幅を指定 */
+            height: 50px; /* 縦幅を指定 */
+        }
+        footer ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+        }
+        footer ul li {
+            margin: 0 15px;
+        }
+        footer ul li a {
+            color: #fff;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>キャスト一覧</h1>
+    <nav>
+        <a href="https://s-all11.github.io/Test-open-view/">
+            <img src="images/logo.jpg" alt="サイトロゴ" class="logo">
+        </a>
+        <a href="https://s-all11.github.io/Test-open-view/">トップページ</a>
+        <a href="利用案内.html">利用案内</a>
+        <a href="料金表.html">ご利用料金</a>
+        <a href="https://s-all11.github.io/Test-open-view/index4.html">キャスト一覧</a>
+        <a href="q_and_f.html">よくあるご質問</a>
+        <a href="https://s-all11.github.io/Test-open-view/helppage.html">ヘルプページ</a>
+        <a href="login.html">ログイン</a>
+        <a href="アカウント登録.html">会員登録</a>
+    </nav>
 </header>
 
-<div class="contact-icons" id="Cast-list"></div>
+<div class="contact-icons" id="contact-icons">
+    <!-- キャスト情報はJavaScriptで動的に挿入 -->
+</div>
+
+<footer>
+    <ul>
+        <li><a href="当サイトについて.html">当サイトについて</a></li>
+        <li><a href="会社概要.html">会社概要</a></li>
+        <li><a href="https://s-all11.github.io/Test-open-view/利用規約.html">利用規約</a></li>
+        <li><a href="https://s-all11.github.io/Test-open-view/Policy.html">プライバシーポリシー</a></li>
+        <li><a href="https://s-all11.github.io/Test-open-view/">ご要望</a></li>
+        <li><a href="https://s-all11.github.io/Test-open-view/">お問い合わせ</a></li>
+    </ul>
+</footer>
 
 <script>
-    const statuses = ["待機中", "取り込み中", "離席中", "オフライン"];
-    
-    // 初期状態
-    let CastStatuses = {
-        "Cast_A": 0, // 待機中
-        "Cast_B": 0, // 待機中
-        "Cast_C": 0  // 待機中
-    };
-
+    const statuses = ["待機中", "対応中", "休憩中", "本日お休み"];
     const users = [
-        {name: "Cast_A", img: "icon_images1.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_1.html"},
-        {name: "Cast_B", img: "icon_images2.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_2.html"},
-        {name: "Cast_C", img: "icon_images3.png", link: "https://s-all11.github.io/Test-open-view/Cast_chat_3.html"}
+        {name: "Cast_A", status: 3, img: "icon_images1.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_1.html"},
+        {name: "Cast_B", status: 3, img: "icon_images2.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_2.html"},
+        {name: "Cast_C", status: 3, img: "icon_images3.png", link: "https://s-all11.github.io/Test-open-view/Cast_chat_3.html"}
     ];
 
-    // キャストリストを描画
-    function renderCastList() {
-        const CastList = document.getElementById("Cast-list");
-        CastList.innerHTML = ""; // リストを初期化
+    function updateStatuses() {
+        const container = document.getElementById("contact-icons");
+        container.innerHTML = ""; // 古い情報をクリア
         users.forEach(user => {
-            const statusText = statuses[CastStatuses[user.name]];
-            CastList.innerHTML += `
+            const statusText = statuses[user.status];
+            const userElement = `
                 <a href="${user.link}" target="_blank">
                     <img src="${user.img}" alt="${user.name} icon">
                     ${user.name}
                     <br><span>${statusText}</span>
                 </a>
             `;
+            container.insertAdjacentHTML("beforeend", userElement);
         });
     }
 
-    // ステータス更新（ランダム更新を削除）
-    function updateStatuses() {
-        // 状態を再描画するだけで、CastStatuses自体を変更しない
-        renderCastList();
-    }
+    // 1分ごとに状態を更新
+    setInterval(() => {
+        updateStatuses();
+    }, 60000);
 
-    // 初期描画
-    renderCastList();
-
-    // 1分ごとに状態を再描画
-    setInterval(updateStatuses, 60000);
-
-    // デバッグ用: 状態をコンソールで確認可能
-    console.log("CastStatuses を直接編集して状態を変更できます。例: CastStatuses['Cast_A'] = 2;");
+    // 初回描画
+    updateStatuses();
 </script>
 
 </body>
