@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キャスト管理ページ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            paddin      : 0;
+        }
+        header, footer {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        header a, footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        .Cast-form {
+            margin-bottom: 20px;
+        }
+        .Cast-form label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .Cast-form select {
+            width: 100%;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .Cast-form button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 3px;
+        }
+        .Cast-form button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h2>キャスト管理ページ</h2>
+        <nav>
+            <a href="/">ホーム</a>
+            <a href="/contact">お問い合わせ</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>キャストのステータス変更</h1>
+        <form id="CastStatusForm">
+            <!-- キャスト A のフォーム -->
+            <div class="Cast-form">
+                <label for="CastAStatus">Cast_A のステータス</label>
+                <select id="CastAStatus" name="CastAStatus">
+                    <option value="0">待機中</option>
+                    <option value="1">接客中</option>
+                    <option value="2">離席中</option>
+                    <option value="3">オフライン</option>
+                </select>
+            </div>
+            <!-- キャスト B のフォーム -->
+            <div class="Cast-form">
+                <label for="CastBStatus">Cast_B のステータス</label>
+                <select id="CastBStatus" name="CastBStatus">
+                    <option value="0">待機中</option>
+                    <option value="1">接客中</option>
+                    <option value="2">離席中</option>
+                    <option value="3">オフライン</option>
+                </select>
+            </div>
+            <!-- キャスト C のフォーム -->
+            <div class="Cast-form">
+                <label for="CastCStatus">Cast_C のステータス</label>
+                <select id="CastCStatus" name="CastCStatus">
+                    <option value="0">待機中</option>
+                    <option value="1">接客中</option>
+                    <option value="2">離席中</option>
+                    <option value="3">オフライン</option>
+                </select>
+            </div>
+            <button type="button" onclick="sendStatus()">送信</button>
+        </form>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 キャスト管理システム. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function sendStatus() {
+            // 各ステータスの値を取得
+            const CastAStatus = document.getElementById("CastAStatus").value;
+            const CastBStatus = document.getElementById("CastBStatus").value;
+            const CastCStatus = document.getElementById("CastCStatus").value;
+
+            // 送信データの作成
+            const data = {
+                CastA: CastAStatus,
+                CastB: CastBStatus,
+                CastC: CastCStatus
+            };
+
+            // データをサーバーに送信
+            fetch('/update-status', { // 適切なエンドポイントに変更
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                alert("ステータスを更新しました。");
+                console.log(result);
+            })
+            .catch(error => {
+                alert("エラーが発生しました。");
+                console.error(error);
+            });
+        }
+    </script>
+</body>
+</html>
