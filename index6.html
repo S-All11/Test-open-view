@@ -54,25 +54,25 @@
     const statuses = ["待機中", "取り込み中", "離席中", "オフライン"];
     
     // 初期状態
-    let CastStatuses = {
-        "Cast_A": 0, // 待機中
-        "Cast_B": 1, // 取り込み中
-        "Cast_C": 3  // オフライン
+    let staffStatuses = {
+        "Staff_A": 0, // 待機中
+        "Staff_B": 1, // 取り込み中
+        "Staff_C": 3  // オフライン
     };
 
     const users = [
-        {name: "Cast_A", img: "icon_images1.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_1.html"},
-        {name: "Cast_B", img: "icon_images2.jpg", link: "https://s-all11.github.io/Test-open-view/Cast_chat_2.html"},
-        {name: "Cast_C", img: "icon_images3.png", link: "https://s-all11.github.io/Test-open-view/Cast_chat_3.html"}
+        {name: "Staff_A", img: "icon_images1.jpg", link: "https://my_github_id.github.io/Test-open-view/Staff_chat_1.html"},
+        {name: "Staff_B", img: "icon_images2.jpg", link: "https://my_github_id.github.io/Test-open-view/Staff_chat_2.html"},
+        {name: "Staff_C", img: "icon_images3.png", link: "https://my_github_id.github.io/Test-open-view/Staff_chat_3.html"}
     ];
 
-    // キャストリストを描画
-    function renderCastList() {
-        const CastList = document.getElementById("Cast-list");
-        CastList.innerHTML = ""; // リストを初期化
+    // スタッフリストを描画
+    function renderStaffList() {
+        const staffList = document.getElementById("staff-list");
+        staffList.innerHTML = ""; // リストを初期化
         users.forEach(user => {
-            const statusText = statuses[CastStatuses[user.name]];
-            CastList.innerHTML += `
+            const statusText = statuses[staffStatuses[user.name]];
+            staffList.innerHTML += `
                 <a href="${user.link}" target="_blank">
                     <img src="${user.img}" alt="${user.name} icon">
                     ${user.name}
@@ -82,20 +82,20 @@
         });
     }
 
-    // ステータスの更新（例としてランダムな状態変更を使用）
+    // ステータス更新（ランダム更新を削除）
     function updateStatuses() {
-        Object.keys(CastStatuses).forEach(name => {
-            // ランダムな状態（本番環境ではAPIからデータを取得するなどで更新）
-            CastStatuses[name] = Math.floor(Math.random() * statuses.length);
-        });
-        renderCastList(); // 更新後のリストを再描画
+        // 状態を再描画するだけで、staffStatuses自体を変更しない
+        renderStaffList();
     }
 
     // 初期描画
-    renderCastList();
+    renderStaffList();
 
-    // 1分ごとに状態を更新
+    // 1分ごとに状態を再描画
     setInterval(updateStatuses, 60000);
+
+    // デバッグ用: 状態をコンソールで確認可能
+    console.log("staffStatuses を直接編集して状態を変更できます。例: staffStatuses['Staff_A'] = 2;");
 </script>
 
 </body>
